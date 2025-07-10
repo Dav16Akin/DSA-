@@ -65,57 +65,99 @@ const isPalindrome = function (x) {
 
 // console.log(isPalindrome(121));
 
-
 const isValidParenthesis = (str) => {
+  const stack = [];
 
-  const stack = []
-  
   const brackets = {
     "(": ")",
     "{": "}",
-    "[": "]"
-  }
+    "[": "]",
+  };
 
   for (let char of str) {
-    if(brackets[char]) {
-      stack.push(char)
-    }else {
-      let top = stack.pop()
-      
+    if (brackets[char]) {
+      stack.push(char);
+    } else {
+      let top = stack.pop();
+
       if (!top || brackets[top] !== char) {
-        return false
+        return false;
       }
     }
   }
 
- return stack.length ===  0
-  
-}
+  return stack.length === 0;
+};
 
 // console.log(isValidParenthesis("(){}[]"));
+// console.log(isValidParenthesis("((()))"));
 // console.log(isValidParenthesis("({[]})"));
 // console.log(isValidParenthesis("([)]"));
 // console.log(isValidParenthesis("()"));
 // console.log(isValidParenthesis("{"));
 
-
 const reverseString = (str) => {
-  const stack = []
+  const stack = [];
 
-  for(let char of str) {
-    stack.push(char)
+  for (let char of str) {
+    stack.push(char);
   }
 
-  let reversedStr = ""
+  let reversedStr = "";
 
-  while(stack.length > 0) {
-    reversedStr += stack.pop()
+  while (stack.length > 0) {
+    reversedStr += stack.pop();
   }
 
-  return reversedStr
-}
-
+  return reversedStr;
+};
 
 const reversedString = reverseString("hello world");
 
-console.log(reversedString);
+// console.log(reversedString);
+
+const repeatWordsCount = (word) => {
+  const stack = {};
+
+  const words = word.toLowerCase().split(" ");
+
+  for (const word of words) {
+    if (word in stack) {
+      stack[word]++;
+    } else {
+      stack[word] = 1;
+    }
+  }
+
+  return stack;
+};
+
+let repeat = repeatWordsCount("Hello my name name name is john");
+
+// console.log(repeat);
+
+const twoSum = (nums, target) => {
+  const numsMap = {};
+
+  for (let i = 0; i < nums.length; i++) {
+    const compliment = target - nums[i];
+
+    if (compliment in numsMap && numsMap[compliment] !== i) {
+      return [numsMap[compliment], i];
+    }
+
+    numsMap[nums[i]] = i;
+  }
+
+  return [];
+};
+
+const nums = [2, 5, 11, 15, 7];
+
+const target = 9;
+
+const result = twoSum(nums, target);
+
+// console.log(result);
+
+
